@@ -11,6 +11,7 @@ export async function getCoachName() {
  * @param {String} name 
  */
 export async function notEat(name) {
+  Console.print('');
   const notEatFood = await Console.readLineAsync(name +'(이)가 못 먹는 메뉴를 입력해 주세요.\n');
 
   return notEatFood;
