@@ -1,6 +1,6 @@
 import {Console} from '@woowacourse/mission-utils';
 
-async function getCoachName() {
+export async function getCoachName() {
   const coach = await Console.readLineAsync('코치의 이름을 입력해 주세요. (, 로 구분)\n');
 
   return coach;
@@ -10,7 +10,7 @@ async function getCoachName() {
  * 
  * @param {String} name 
  */
-async function notEat(name) {
+export async function notEat(name) {
   const notEatFood = await Console.readLineAsync(name +'(이)가 못 먹는 메뉴를 입력해 주세요.\n');
 }
 
