@@ -33,8 +33,15 @@ class PersonerMenu {
   #foodArray(name) {
     const eachCoachWeekMenu = [];
     const notEat = this.#notEat[name].notEat;
+    let recommend;
     this.#categoris['카테고리'].forEach((country) => {
-      eachCoachWeekMenu.push(this.#recomend(country, notEat));
+      while (true) {
+        recommend = this.#recomend(country, notEat);
+        if (!eachCoachWeekMenu.includes(recommend)) {
+          break;
+        }
+      }
+      eachCoachWeekMenu.push(recommend);
     });
 
     return eachCoachWeekMenu;
@@ -58,4 +65,4 @@ export default PersonerMenu;
 ////
 //console.log(x);
 
-//this.#coachNotEat[name] = { notEat };
+////this.#coachNotEat[name] = { notEat };
