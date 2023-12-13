@@ -2,14 +2,14 @@ import { CATEGORY, NUM } from '../constants/contants.js';
 import { Random } from '@woowacourse/mission-utils';
 class Category {
   #categories = {
-    구분: [],
+    카테고리: [],
   };
 
   matchCategory() {
     const numArray = this.#randomCategory();
     const menu = Object.keys(CATEGORY);
     numArray.forEach((day) => {
-      this.#categories.구분.push(menu[day - 1]);
+      this.#categories.카테고리.push(menu[day - 1]);
     });
     return this.#categories;
   }

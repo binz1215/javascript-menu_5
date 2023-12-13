@@ -1,6 +1,7 @@
 import CoachValidate from '../controller/coach_validate.js';
 import NotEatValidaLte from '../controller/notEat_validate.js';
 import Category from './category_make.js';
+//import PersonerMenu from './coach_menu.js';
 
 class Play {
   //객체
@@ -15,8 +16,13 @@ class Play {
       this.#coachNotEat[name] = { notEat };
     }
     this.#catagory = new Category().matchCategory();
-    return this.#catagory;
+    return this.#coachNotEat;
   }
+
+  //personerMenu() {
+  //  const personer = new PersonerMenu();
+  //  personer.setObject(this.#coachNotEat, this.#catagory);
+  //}
 }
 export default Play;
 
