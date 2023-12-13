@@ -1,75 +1,67 @@
-import { getCoachName, notEat } from '../view/inputView.js';
+import { notEat } from '../view/inputView.js';
 import { Console } from '@woowacourse/mission-utils';
-import { NUM } from '../constants/contants.js';
+import { CATEGORY, NUM } from '../constants/contants.js';
 
-class Validate {
-  #coach;
+class NotEatValidaLte {
   #notEat;
-
-  async righitCoach() {
+  /**
+   * name 반드시 전달받아야.
+   * @param {string} name
+   * @returns
+   */
+  async righitNotEat(name) {
     let valid = true;
 
     while (valid) {
       try {
-        this.#coach = await this.#coachArray();
-        this.#coachNameValidCheck();
+        this.#notEat = await this.#notEatArray(name);
+        this.#notEatValidCheck();
         valid = false;
       } catch (error) {}
     }
-    return this.#coach;
+    return this.#notEat;
   }
 
-  async #coachArray() {
-    const coach = await getCoachName();
-    const array = coach.split(',').map((element) => element.trim());
+  async #notEatArray(name) {
+    const food = await notEat(name);
+    const array = food.split(',').map((element) => element.trim());
 
+    //지금 아무것도 입력하지 않을 때 [ '' ]이렇게 반환하는데 나중에 뭔가 아예 빈게 필요하면 if~예외처리 ㄱㄱ
     return array;
   }
 
-  #coachNameValidCheck() {
-    if (!this.#isString()) {
-      Console.print(`[ERROR] 코치 이름은 한글로만 적어야 합니다.`);
-      throw new Error();
+  #notEatValidCheck() {
+    if (this.#notEat[0] === '') return true;
+    if (!this.#isRightMenu()) {
+      Console.print(`[ERROR] 메뉴 이름은 메뉴 안에 있어야 합니다.`);
+      throw new Error(`[ERROR]`);
     }
-    if (this.#isRightCoachNum()) {
-      Console.print(`[ERROR] 코치진은 2~5명 사이입니다.`);
-      throw new Error();
-    }
-    if (this.#isRightCoachName()) {
-      Console.print(`[ERROR] 코치 이름의 길이는 두글자에서 네글자 사이입니다.`);
-      throw new Error();
+    if (this.#isRightMenuNum()) {
+      Console.print(`[ERROR] 메뉴 이름은 두개까지만 입력 가능합니다.`);
+      throw new Error(`[ERROR]`);
     }
     if (this.#isDuplication()) {
-      Console.print(`[ERROR] 코치 이름은 중복될 수 없습니다.`);
-      throw new Error();
+      Console.print(`[ERROR] 메뉴 이름은 중복될 수 없습니다.`);
+      throw new Error(`[ERROR]`);
     }
   }
-  #isString() {
-    const koreanRegExp = /^[가-힣]+$/;
-    for (const element of this.#coach) {
-      if (!koreanRegExp.test(element)) {
-        return false;
-      }
-    }
 
-    return true;
+  #isRightMenu() {
+    return this.#notEat.every((food) => Object.values(CATEGORY).flat().includes(food));
   }
 
-  #isRightCoachNum() {
-    if (this.#coach.length < NUM.TWO || this.#coach.length > NUM.FIVE) return true;
-  }
-
-  #isRightCoachName() {
-    return this.#coach.some((name) => name.length < NUM.TWO || name.length > NUM.FOUR);
+  #isRightMenuNum() {
+    if (this.#notEat.length < NUM.ZERO || this.#notEat.length > NUM.TWO) return true;
   }
 
   #isDuplication() {
-    const coachSet = new Set(this.#coach);
-    if (this.#coach.length !== coachSet.size) return true;
+    const menuSet = new Set(this.#notEat);
+    if (this.#notEat.length !== menuSet.size) return true;
   }
 }
-export default Validate;
+export default NotEatValidaLte;
 
-const play = new Validate();
-const x = await play.righitCoach();
-console.log(x);
+//const play = new NotEatValidaLte();
+//const name = 'pobi';
+//const x = await play.righitNotEat(name);
+//console.log(x);

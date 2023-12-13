@@ -28,19 +28,19 @@ class CoachValidate {
   #coachNameValidCheck() {
     if (!this.#isString()) {
       Console.print(`[ERROR] 코치 이름은 한글로만 적어야 합니다.`);
-      throw new Error();
+      throw new Error(`[ERROR]`);
     }
     if (this.#isRightCoachNum()) {
       Console.print(`[ERROR] 코치진은 2~5명 사이입니다.`);
-      throw new Error();
+      throw new Error(`[ERROR]`);
     }
     if (this.#isRightCoachName()) {
       Console.print(`[ERROR] 코치 이름의 길이는 두글자에서 네글자 사이입니다.`);
-      throw new Error();
+      throw new Error(`[ERROR]`);
     }
     if (this.#isDuplication()) {
       Console.print(`[ERROR] 코치 이름은 중복될 수 없습니다.`);
-      throw new Error();
+      throw new Error(`[ERROR]`);
     }
   }
   #isString() {
