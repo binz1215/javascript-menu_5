@@ -35,6 +35,6 @@ class Play {
 }
 export default Play;
 
-const play = new Play();
-const x = await play.run();
-console.log(x);
+//const play = new Play();
+//const x = await play.run();
+//console.log(x);
